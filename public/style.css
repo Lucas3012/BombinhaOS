@@ -1,0 +1,17 @@
+:root { --p: #004aad; --s: #002864; --w: #25d366; --bg: #f4f7f6; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+body { background: var(--bg); padding-top: 60px; }
+
+.header { position: fixed; top: 0; width: 100%; height: 55px; background: #fff; display: flex; align-items: center; padding: 0 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 100; }
+.logo-text { flex: 1; text-align: center; font-weight: bold; color: var(--p); }
+
+.btn-add { width: 90%; margin: 15px auto; display: block; background: var(--p); color: #fff; border: none; padding: 12px; border-radius: 8px; font-weight: bold; }
+
+.card { background: #fff; margin: 10px; padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 5px solid var(--p); }
+.card h3 { font-size: 16px; color: var(--s); margin-bottom: 5px; }
+.card p { font-size: 14px; color: #555; margin-bottom: 3px; }
+
+.actions { display: flex; gap: 10px; margin-top: 12px; }
+.btn-zap { flex: 1; background: #e8faf0; color: var(--w); border: 1px solid var(--w); padding: 8px; border-radius: 6px; font-weight: bold; text-align: center; text-decoration: none; font-size: 13px; }
+.btn-fin { flex: 1; background: #f0f0f0; color: #666; border: 1px solid #ccc; padding: 8px; border-radius: 6px; font-weight: bold; font-size: 13px; }
+.status-ok { color: var(--w); font-weight: bold; font-size: 13px; }

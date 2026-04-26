@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADM - Gestão de Acessos</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header class="header">
+        <button onclick="window.location.href='index.html'" style="background:none; border:none; color:#004aad; font-weight:bold;">← Voltar</button>
+        <div class="logo-text">ADMINISTRAÇÃO</div>
+    </header>
+
+    <main style="padding: 15px;">
+        <section class="card">
+            <h3>Novo Usuário</h3>
+            <input type="text" id="new-user" placeholder="Usuário" style="width:100%; padding:10px; margin:5px 0; border:1px solid #ccc; border-radius:8px;">
+            <input type="password" id="new-pass" placeholder="Senha" style="width:100%; padding:10px; margin:5px 0; border:1px solid #ccc; border-radius:8px;">
+            <button onclick="criarLogin()" class="btn-add" style="margin: 10px 0;">CADASTRAR ACESSO</button>
+        </section>
+
+        <h3 style="margin: 20px 10px 10px;">Logins Ativos</h3>
+        <div id="lista-logins"></div>
+    </main>
+
+    <script>
+        const API_URL = "https://matched-correlation-knitting-tale.trycloudflare.com";
+
+        async function carregarLogins() {
+            if(API_URL === "AGUARDANDO_LINK") return;
+            const res = await fetch(`${API_URL}/api/logins`);
+            const dados = await res.json();
+            const container = document.getElementById('lista-logins');
+            
+            container.innerHTML = dados.map(l => `
+                <div class="card" style="border-left-color: #e74c3c;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <strong>${l.usuario}</strong>
+                            <p>Senha: ****</p>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <button onclick="excluirLogin(${l.id})" style="background:#ff7675; border:none; color:white; padding:8px; border-radius:5px;">Excluir</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function criarLogin() {
+            const usuario = document.getElementById('new-user').value;
+            const senha = document.getElementById('new-pass').value;
+            
+            if(!usuario || !senha) return Swal.fire('Erro', 'Preencha todos os campos', 'error');
+
+            await fetch(`${API_URL}/api/logins`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ usuario, senha })
+            });
+            
+            document.getElementById('new-user').value = '';
+            document.getElementById('new-pass').value = '';
+            carregarLogins();
+            Swal.fire('Sucesso', 'Login criado!', 'success');
+        }
+
+        async function excluirLogin(id) {
+            const confirm = await Swal.fire({
+                title: 'Tem certeza?',
+                text: "O usuário perderá o acesso imediatamente.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, excluir'
+            });
+
+            if(confirm.isConfirmed) {
+                await fetch(`${API_URL}/api/logins/${id}`, { method: 'DELETE' });
+                carregarLogins();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarLogins);
+    </script>
+</body>
+</html>
