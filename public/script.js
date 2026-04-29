@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://snapshot-indicating-dsl-identifies.trycloudflare.com";
+const API_BASE_URL = "https://replica-pendant-nav-docs.trycloudflare.com";
 
 async function carregarOS() {
     if(API_BASE_URL === "AGUARDANDO_LINK") return;
