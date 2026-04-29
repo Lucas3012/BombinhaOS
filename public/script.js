@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://grounds-void-outlined-concentrations.trycloudflare.com";
+const API_BASE_URL = "https://snapshot-indicating-dsl-identifies.trycloudflare.com";
 
 async function carregarOS() {
     if(API_BASE_URL === "AGUARDANDO_LINK") return;
