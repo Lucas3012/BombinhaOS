@@ -2,18 +2,64 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMASA PRO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EMASA PRO - Sistema de Gestão</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header class="header">
-        <div class="logo-text">EMASA PRO</div>
+        <div class="header-content">
+            <div class="logo-area">
+                <i class="fas fa-droplet" style="color: #004aad;"></i>
+                <div class="logo-text">EMASA <span>PRO</span></div>
+            </div>
+            <div class="status-indicator">
+                <i class="fas fa-circle"></i> Online
+            </div>
+        </div>
     </header>
 
-    <button class="btn-add" onclick="alert('Funcionalidade em breve')">+ NOVA ORDEM</button>
-    
-    <div id="lista-os"></div>
+    <main class="container">
+        
+        <div class="action-bar">
+            <button class="btn-add" onclick="abrirFormulario()">
+                <i class="fas fa-plus-circle"></i> NOVA ORDEM DE SERVIÇO
+            </button>
+        </div>
+
+        <div class="quick-stats">
+            <div class="stat-item">
+                <span class="stat-label">Pendentes</span>
+                <span id="count-pendente" class="stat-num">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Concluídas</span>
+                <span id="count-concluido" class="stat-num">0</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">Serviços Recentes</h2>
+        <div id="lista-os" class="list-container">
+            <div class="loading-msg">Carregando ordens de serviço...</div>
+        </div>
+
+    </main>
+
+    <nav class="bottom-nav">
+        <div class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Início</span>
+        </div>
+        <div class="nav-item" onclick="window.location.href='admin.html'">
+            <i class="fas fa-user-shield"></i>
+            <span>ADM</span>
+        </div>
+    </nav>
 
     <script src="script.js"></script>
 </body>
